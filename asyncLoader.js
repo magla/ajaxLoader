@@ -1,14 +1,8 @@
 /*
-    JS object for asynchronous loading of web pages
-    Input parameters: 
-        - settings: JS object
-
-    Dependencies: jQuery
-
-    Usage: 
-    var asyncLoader = new AsyncLoader();
-    asyncLoader.load($(link), {}); 
-
+    AjaxLoader
+    by Magdalena Magličić
+    Jan 2017
+    version 1.0.0
 */
 
 (function(window) {
@@ -23,13 +17,17 @@
 
         // Default settings
         this.settings = {
-            link: null,
+            link: $('<a href="#"></a>'),
             loadWrapper: '.asyncWrapper',
             loadContent: '.asyncContent',
+            partial: true,
             pathname: window.location.pathname,
             production: false,
-            preloadAction: function() {},
-            postloadAction: function() {}
+            preloadAction: null,
+            postloadAction: null,
+            errorAction: function() {
+                location.href = '/404.html';
+            }
         };
     }
 
@@ -45,9 +43,7 @@
      */
     AsyncLoader.prototype.load = function(settings) {
         this.settings = $.extend(this.settings, settings);
-        this.settings.preloadAction();
         this._loadContent(this.settings.link);
-        this.settings.postloadAction();
     }
 
     /**
@@ -55,27 +51,36 @@
      */
     AsyncLoader.prototype._loadContent = function() {
         var loadSrc = this.settings.link.attr('href');
+
         $.ajax({
-                url: loadSrc,
-                data: {
-                    xhr: 1
-                },
-                method: 'POST'
-            }).success(function(data) {
+            url: loadSrc,
+            method: 'GET',   
+            dataType: 'html',
+            async: true
+        })
+        .beforeSend(this.settings.preloadAction())
+        .success(function(data) {
+
+            // Append new html
+            this._appendData(data);
+
+            // Run google analytics if on production
+            if (production)
+                this._googleAnalytics();
+    
+            // Update the history via History API
+            this._historyUpdate();
+
+            // Update metadata if the data is not partial
+            if (!partial){
                 var head = $(data).find('head');
-
-                // Append new html
-                this._appendData(data);
-
-                // Update metadata and run google analytics
                 this._metadataUpdate(head);
-                this._historyUpdate();
+            }
 
-                return true;
-            })
-            .error(function(data) {
-                location.href = '/404.html';
-            });
+            return true;
+        })
+        .error(this.settings.errorAction())
+        .complete(this.settings.postloadAction());
     }
 
     /**
@@ -83,6 +88,8 @@
      */
     AsyncLoader.prototype._appendData = function(data) {
         data = $(data).find(this.settings.loadContent);
+
+        // Empty the wrapper and append new data to the DOM
         $(asyncLoader.loadWrapper).empty().append(data);
     }
 
