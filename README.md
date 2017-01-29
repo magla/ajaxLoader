@@ -21,7 +21,7 @@ Settings
 -------------------------
 - <b>link</b>  
 A jQuery object representing the clicked link, e.g. ``$(<a href="#"></a>)``  
-*default value*: null  
+*default value*: ``null``
 
 - <b>loadWrapper</b>  
 Selector class for the wrapper that contains the code that needs to be updated. Does not get changed in the process.   
@@ -34,22 +34,22 @@ Every partial HTML has to be wrapped in a div with this class.
 
 - <b>partial</b>  
 Is the HTML returned partial, or a full web page, head and all?  
-*default value*: true  
+*default value*: ``true``  
 
 - <b>pathname</b>  
-*default value*: window.location.pathname  
+*default value*: ``window.location.pathname``  
 
 - <b>production</b>  
 Is the code in production? Matters for Google Analytics.  
-*default value*: false  
+*default value*: ``false``  
 
 - <b>preloadAction</b>  
 Function to be run before the loading, e.g. preloading animation; corresponds to jQuery ajax `beforeSend`  
-*default value*: null  
+*default value*: ``null``  
 
 - <b>postloadAction</b>  
 Function to be run after the loading; corresponds to jQuery ajax `complete`  
-*default value*: null  
+*default value*: ``null``  
 
 - <b>errorAction</b>  
 Function to be run if an error occurs; corresponds to jQuery ajax `error`  
