@@ -3,16 +3,19 @@
 <b>SAMPLE CODE</b>  
 *Not to be used in production in the original form.*
 
-JS object for asynchronous partial loading of web pages.  
+JS object for asynchronous partial loading of web pages.
 Input parameters: settings (JS object)  
 
-Dependencies: jQuery >= 1.3.0
+Dependencies:  
+jQuery >= 1.3.0  
+History API  
+Google Analytics  
 
 Usage  
 -------------------------
 var asyncLoader = new AsyncLoader();  
-var settings = {};  
-asyncLoader.load(settings); 
+var settings = { ... };    
+asyncLoader.load(settings);  
 
 Settings  
 -------------------------
@@ -25,8 +28,13 @@ Selector class for the wrapper that contains the code that needs to be updated. 
 *default value*: '.asyncWrapper'  
 
 - <b>loadContent</b>  
-Selector class for the part of the HTML that needs to be changed. Every partial HTML has to be wrapped in a div with this class.  
+Selector class for the part of the HTML that needs to be changed.  
+Every partial HTML has to be wrapped in a div with this class.  
 *default value*: '.asyncContent'  
+
+- <b>partial</b>  
+Is the HTML returned partial, or a full web page, head and all?
+*default value*: true  
 
 - <b>pathname</b>  
 *default value*: window.location.pathname  
