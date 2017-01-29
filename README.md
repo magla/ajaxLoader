@@ -1,6 +1,6 @@
 # ajaxLoader
 
-<b>SAMPLE CODE</b>  
+<b>SAMPLE CODE, NOT TESTED</b>  
 *Not to be used in production in the original form.*
 
 JS object for asynchronous partial loading of web pages.  
