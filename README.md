@@ -3,7 +3,7 @@
 <b>SAMPLE CODE</b>  
 *Not to be used in production in the original form.*
 
-JS object for asynchronous partial loading of web pages.
+JS object for asynchronous partial loading of web pages.  
 Input parameters: settings (JS object)  
 
 <b>Dependencies</b>  
