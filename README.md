@@ -6,7 +6,7 @@
 JS object for asynchronous partial loading of web pages.
 Input parameters: settings (JS object)  
 
-<a>Dependencies</>  
+<b>Dependencies</b>  
 jQuery >= 1.3.0  
 History API  
 Google Analytics  
