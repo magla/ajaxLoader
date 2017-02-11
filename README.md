@@ -50,12 +50,11 @@ Main function to be called to load content
 
 <b>preloadAction</b>  
 Function to be run before the loading, e.g. preloading animation; corresponds to jQuery ajax `beforeSend`  
-*parameters*: ``callback (function)``
+Change the function on the prototype before calling the load function to use it  
  
 <b>postloadAction</b>  
 Function to be run after the loading; corresponds to jQuery ajax `complete`   
-*parameters*: ``callback (function)``
+Change the function on the prototype before calling the load function to use it  
 
 <b>errorAction</b>  
 Function to be run if an error occurs; corresponds to jQuery ajax `error`  
-*parameters*: ``callback (function)``
