@@ -1,4 +1,4 @@
-# ajaxLoader
+# asyncLoader
 
 <b>SAMPLE CODE</b>
 
