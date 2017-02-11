@@ -46,20 +46,16 @@ Methods
 -------------------------
 <b>load</b>  
 Main function to be called to load content  
-*parameters*: settings (JS object)  
-*default value*: ``null``  
+*parameters*: settings (JS object)
 
 <b>preloadAction</b>  
 Function to be run before the loading, e.g. preloading animation; corresponds to jQuery ajax `beforeSend`  
-*default value*: ``null``  
-
+*parameters*: callback (function)
+ 
 <b>postloadAction</b>  
-Function to be run after the loading; corresponds to jQuery ajax `complete`  
-*default value*: ``null``  
+Function to be run after the loading; corresponds to jQuery ajax `complete`   
+*parameters*: callback (function)
 
 <b>errorAction</b>  
 Function to be run if an error occurs; corresponds to jQuery ajax `error`  
-*default value*: 
-``function() {  
-   location.href = '/404.html';  
- }``
+*parameters*: callback (function)
