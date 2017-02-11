@@ -1,7 +1,6 @@
 # ajaxLoader
 
-<b>SAMPLE CODE, NOT TESTED</b>  
-*Not to be used in production in the original form.*
+<b>SAMPLE CODE</b>
 
 JS object for asynchronous partial loading of web pages.  
 Input parameters: settings (JS object)  
@@ -25,11 +24,11 @@ A jQuery object representing the clicked link, e.g. ``$(<a href="#"></a>)``
 
 - <b>loadWrapper</b>  
 Selector class for the wrapper that contains the code that needs to be updated. Does not get changed in the process.   
-*default value*: ``.asyncWrapper``   
+*default value*: ``#asyncWrapper``   
 
 - <b>loadContent</b>  
 Selector class for the part of the HTML that needs to be changed.  
-Every partial HTML has to be wrapped in a div with this class.  
+Every partial HTML has to be wrapped in a div with this class and a div with the loadWrapper class.  
 *default value*: ``.asyncContent``
 
 - <b>partial</b>  
@@ -43,7 +42,14 @@ Is the HTML returned partial, or a full web page, head and all?
 Is the code in production? Matters for Google Analytics.  
 *default value*: ``false``  
 
-- <b>preloadAction</b>  
+Methods
+-------------------------
+<b>load</b>  
+Main function to be called to load content  
+*parameters*: settings (JS object)  
+*default value*: ``null``  
+
+<b>preloadAction</b>  
 Function to be run before the loading, e.g. preloading animation; corresponds to jQuery ajax `beforeSend`  
 *default value*: ``null``  
 
