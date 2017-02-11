@@ -46,18 +46,12 @@
         this._loadContent(this.settings.link);
     }
 
-    AsyncLoader.prototype.preloadAction = function(callback) {
-        callback();
-    }
+    AsyncLoader.prototype.preloadAction = function() {}
 
-    AsyncLoader.prototype.postloadAction = function(callback) {
-        callback();
-    }
+    AsyncLoader.prototype.postloadAction = function() {}
 
-    AsyncLoader.prototype.errorAction = function(callback) {
-        if (callback) {
-            callback();
-        } else location.href = '404.html';
+    AsyncLoader.prototype.errorAction = function() {
+       // location.href = '404.html';
     }
 
     /**
@@ -67,35 +61,34 @@
         var loadSrc = this.settings.link.attr('href');
         var that = this;
 
+        that.preloadAction();
+
         $.ajax({
             url: loadSrc,
             method: 'GET',   
             dataType: 'html',
-            async: true,
-            beforeSend: that.preloadAction(),
-            success: function(data) {
+            async: true
+        })
+        .done(function(data) {
+            // Append new html
+            that._appendData(data);
 
-                // Append new html
-                that._appendData(data);
+            // Run google analytics if on production
+            if (that.settings.production)
+                that._googleAnalytics();
+    
+            // Update the history via History API
+            that._historyUpdate();
 
-                // Run google analytics if on production
-                if (that.settings.production)
-                    that._googleAnalytics();
+            // Update metadata if the data is not partial
+            if (!that.settings.partial){
+                var head = $(data).find('head');
+                that._metadataUpdate(head);
+            }
         
-                // Update the history via History API
-                that._historyUpdate();
-
-                // Update metadata if the data is not partial
-                if (!that.settings.partial){
-                    var head = $(data).find('head');
-                    that._metadataUpdate(head);
-                }
-
-                return true;
-            }, 
-            error: that.errorAction(),
-            complete: that.postloadAction()
-        });
+            that.postloadAction();
+        })
+        .fail(that.errorAction())
     }
 
     /**
